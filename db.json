@@ -1,0 +1,12 @@
+{
+    "events": [
+      {
+        "id": 1,
+        "title": "Angular Workshop",
+        "date": "2024-10-12T10:00:00",
+        "location": "Online",
+        "status": "Scheduled"
+      }
+    ]
+  }
+  

@@ -1,0 +1,59 @@
+<div class="container">
+    <h2>Event List</h2>
+  
+    <!-- Search Bar -->
+    <div class="search-bar mb-3">
+      <input 
+        type="text" 
+        class="form-control" 
+        placeholder="Search events..." 
+        [(ngModel)]="searchTerm"
+        aria-label="Search events"
+      />
+    </div>
+  
+    <!-- Event Table -->
+    <table class="table table-striped table-hover mt-3">
+      <thead class="thead-light">
+        <tr>
+          <th>Title</th>
+          <th>Date & Time</th>
+          <th>Location</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of events | customFilter: searchTerm">
+          <td>{{ event.title }}</td>
+          <td>{{ event.date | date: 'short' }}</td>
+          <td>{{ event.location }}</td>
+          <td>{{ event.status }}</td>
+          <td>
+            <!-- Edit Event -->
+            <button class="btn btn-sm btn-primary" [routerLink]="['/events/edit', event.id]">
+              Edit
+            </button>
+            
+            <!-- Delete Event with Confirmation -->
+            <button 
+              class="btn btn-sm btn-danger" 
+              (click)="confirmDeletion(event.id)"
+            >
+              Delete
+            </button>
+  
+            <!-- View Event Details -->
+            <button class="btn btn-sm btn-info" [routerLink]="['/events/details', event.id]">
+              View Details
+            </button>
+          </td>
+        </tr>
+        <!-- Show message if no events match the search term -->
+        <tr *ngIf="(events | customFilter: searchTerm).length === 0">
+          <td colspan="5" class="text-center">No events found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
